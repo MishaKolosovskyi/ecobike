@@ -41,8 +41,8 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void correctFindingBike() {
-        File file = new File("C:\\Users\\PCDOM\\Desktop\\td\\src\\main\\resources\\ecobike.txt");
+    public void correctBikeFinding() {
+        File file = new File("src/main/resources/ecobike.txt");
         String[] foldingBikeParameters =
                 new String[]{"FOLDING BIKE BMW", "", "", "", "", "lemon", ""};
         Optional<Bike> optionalFoldingBike = fileService.findBike(foldingBikeParameters, file);
@@ -71,34 +71,10 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void wrongFindingBike() {
-        File file = new File("C:\\Users\\PCDOM\\Desktop\\td\\src\\main\\resources\\ecobike.txt");
+    public void wrongBikeFinding() {
+        File file = new File("src/main/resources/ecobike.txt");
         String[] data = new String[]{"NONE", "", "", "", "", "", ""};
         Optional<Bike> optionalFoldingBike = fileService.findBike(data, file);
-        if (optionalFoldingBike.isPresent()){
-            FoldingBike bike  =  (FoldingBike) optionalFoldingBike.get();
-            assertEquals("FOLDING BIKE BMW", bike.getBrand());
-            assertEquals("20", bike.getSizeOfWheels());
-            assertEquals("7", bike.getNumberOfGears());
-            assertEquals("14400", bike.getWeight());
-            assertEquals("false", bike.getAvailabilityOfLights());
-            assertEquals("lemon", bike.getColor());
-            assertEquals("1085", bike.getPrice());
-        }else{
             assertEquals(false, optionalFoldingBike.isPresent());
-        }
-        Optional<Bike> optionalBike = fileService.findBike(data, file);
-        if (optionalBike.isPresent()) {
-            EBike bike = (EBike) optionalBike.get();
-            assertEquals("E-BIKE Gazelle", bike.getBrand());
-            assertEquals("25", bike.getMaxSpeed());
-            assertEquals("22200", bike.getWeight());
-            assertEquals("true", bike.getAvailabilityOfLights());
-            assertEquals("26000", bike.getBatteryCapacity());
-            assertEquals("silver", bike.getColor());
-            assertEquals("1735", bike.getPrice());
-        }else {
-            assertEquals(false, optionalBike.isPresent());
-        }
     }
 }
